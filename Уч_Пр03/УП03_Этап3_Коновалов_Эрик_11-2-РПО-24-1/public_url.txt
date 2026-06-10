@@ -1,0 +1,26 @@
+
+VetCare v2.1.0 - Production Demo
+
+
+АДРЕС ПРИЛОЖЕНИЯ:
+http://127.0.0.1:5000
+
+СПОСОБ ЗАПУСКА:
+Локальный demo-стенд через Docker
+
+КОМАНДА ЗАПУСКА:
+scripts\deploy.bat
+
+ИЛИ ВРУЧНУЮ:
+docker compose -f docker-compose.prod.yml up --build -d
+
+ВХОД В СИСТЕМУ:
+Логин: admin
+Пароль: admin123
+
+СТАТУС:
+ Приложение доступно
+ Все функции работают
+ Логи без критических ошибок
+
+GitHub: https://github.com/Mar25119/Vetcare
