@@ -270,3 +270,7 @@ def init_routes(app):
         db.session.commit()
         flash("Приём отменён.", "info")
         return redirect(url_for("list_appointments"))
+    @app.errorhandler(404)
+    def page_not_found(e):
+        """Кастомная страница 404"""
+        return render_template('404.html'), 404
