@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Новая запись на приём</h2>
+    <form method="POST" style="max-width: 600px;">
+        <label for="pet_id"><strong>Пациент:</strong></label><br>
+        <select id="pet_id" name="pet_id" required style="width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 4px;">
+            {% for pet in pets %}
+            <option value="{{ pet.id }}">{{ pet.name }} ({{ pet.species }}, владелец: {{ pet.owner.name }})</option>
+            {% endfor %}
+        </select><br>
+        
+        <label for="doctor_id"><strong>Врач:</strong></label><br>
+        <select id="doctor_id" name="doctor_id" required style="width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 4px;">
+            {% for doctor in doctors %}
+            <option value="{{ doctor.id }}">{{ doctor.full_name }} ({{ doctor.specialization if doctor.specialization else 'Ветеринар' }})</option>
+            {% endfor %}
+        </select><br>
+        
+        <label for="date_time"><strong>Дата и время:</strong></label><br>
+        <input type="datetime-local" id="date_time" name="date_time" required style="width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 4px;"><br>
+        
+        <label for="diagnosis"><strong>Предварительный диагноз (необязательно):</strong></label><br>
+        <textarea id="diagnosis" name="diagnosis" rows="3" style="width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 4px;"></textarea><br>
+        
+        <label for="recommendations"><strong>Рекомендации (необязательно):</strong></label><br>
+        <textarea id="recommendations" name="recommendations" rows="3" style="width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 4px;"></textarea><br>
+        
+        <button type="submit" class="btn">Создать запись</button>
+        <a href="{{ url_for('list_appointments') }}" class="btn btn-secondary" style="margin-left: 10px;">Отмена</a>
+    </form>
+{% endblock %}

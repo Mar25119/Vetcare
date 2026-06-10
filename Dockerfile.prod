@@ -1,0 +1,46 @@
+# ==================================
+# VetCare PRODUCTION Dockerfile
+# ==================================
+
+FROM python:3.11-slim
+
+LABEL maintainer="Konovalov Eric"
+LABEL description="VetCare PRODUCTION - Veterinary Clinic System"
+LABEL version="2.1.0-production"
+
+# Установка системных зависимостей
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Установка Python-зависимостей
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir gunicorn==21.2.0
+
+# Копирование исходного кода
+COPY . .
+
+# Создание папок для БД и логов
+RUN mkdir -p /app/instance /app/logs
+
+# Переменные окружения
+ENV FLASK_APP=app.run \
+    FLASK_ENV=production \
+    FLASK_DEBUG=0 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONPATH=/app
+
+# Порт приложения
+EXPOSE 5000
+
+# Проверка здоровья
+HEALTHCHECK --interval=60s --timeout=10s --start-period=30s --retries=3 \
+    CMD curl -f http://localhost:5000/ || exit 1
+
+# Production-запуск через Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "1", "--timeout", "120", "app:create_app()"]

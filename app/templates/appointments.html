@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Календарь приёмов</h2>
+    <a href="{{ url_for('add_appointment') }}" class="btn">+ Новая запись</a>
+    
+    {% if sorted_dates %}
+        {% for date_str in sorted_dates %}
+            <div style="margin-top: 30px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                <h3 style="color: #0056b3; margin-top: 0;">📅 {{ date_str }}</h3>
+                <table>
+                    <tr>
+                        <th>Время</th>
+                        <th>Пациент</th>
+                        <th>Владелец</th>
+                        <th>Врач</th>
+                        <th>Статус</th>
+                        <th>Действия</th>
+                    </tr>
+                    {% for apt in appointments_by_date[date_str] %}
+                    <tr>
+                        <td>{{ apt.date_time.strftime('%H:%M') }}</td>
+                        <td>{{ apt.pet.name }} ({{ apt.pet.species }})</td>
+                        <td>{{ apt.pet.owner.name }}</td>
+                        <td>{{ apt.doctor.full_name }}</td>
+                        <td>
+                            {% if apt.status == 'scheduled' %}
+                                <span style="color: orange;">Запланирован</span>
+                            {% elif apt.status == 'completed' %}
+                                <span style="color: green;">Завершён</span>
+                            {% else %}
+                                <span style="color: red;">Отменён</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if apt.status == 'scheduled' %}
+                                <form method="POST" action="{{ url_for('complete_appointment', appointment_id=apt.id) }}" style="display:inline;">
+                                    <button type="submit" class="btn" style="padding: 5px 10px; font-size: 12px;">Завершить</button>
+                                </form>
+                                <form method="POST" action="{{ url_for('cancel_appointment', appointment_id=apt.id) }}" style="display:inline;">
+                                    <button type="submit" class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;">Отменить</button>
+                                </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="margin-top: 20px;">Нет запланированных приёмов.</p>
+    {% endif %}
+{% endblock %}

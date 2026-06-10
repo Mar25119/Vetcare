@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Регистрация нового пользователя</h2>
+    <form method="POST" style="max-width: 500px;">
+        <label for="username"><strong>Логин:</strong></label><br>
+        <input type="text" id="username" name="username" required style="width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 4px;"><br>
+        
+        <label for="password"><strong>Пароль:</strong></label><br>
+        <input type="password" id="password" name="password" required style="width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 4px;"><br>
+        
+        <label for="full_name"><strong>ФИО:</strong></label><br>
+        <input type="text" id="full_name" name="full_name" required style="width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 4px;"><br>
+        
+        <label for="role"><strong>Роль:</strong></label><br>
+        <select id="role" name="role" required style="width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 4px;">
+            <option value="admin">Администратор</option>
+            <option value="doctor">Врач</option>
+        </select><br>
+        
+        <label for="phone"><strong>Телефон (необязательно):</strong></label><br>
+        <input type="tel" id="phone" name="phone" style="width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 4px;"><br>
+        
+        <label for="email"><strong>Email (необязательно):</strong></label><br>
+        <input type="email" id="email" name="email" style="width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 4px;"><br>
+        
+        <button type="submit" class="btn">Зарегистрировать</button>
+        <a href="{{ url_for('login') }}" class="btn btn-secondary" style="margin-left: 10px;">Назад ко входу</a>
+    </form>
+{% endblock %}

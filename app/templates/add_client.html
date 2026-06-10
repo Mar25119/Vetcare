@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Регистрация нового клиента</h2>
+    <form method="POST">
+        <label>ФИО:</label><br>
+        <input type="text" name="name" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+        <label>Телефон:</label><br>
+        <input type="text" name="phone" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+        <label>Email (необязательно):</label><br>
+        <input type="email" name="email" style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+        <button type="submit" class="btn">Сохранить</button>
+    </form>
+{% endblock %}

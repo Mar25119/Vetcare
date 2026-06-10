@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Питомцы клиента: {{ client.name }}</h2>
+    <p><a href="{{ url_for('list_clients') }}">← Назад к клиентам</a></p>
+
+    <ul>
+        {% for pet in pets %}
+        <li><strong>{{ pet.name }}</strong> ({{ pet.species }})</li>
+        {% else %}
+        <li>У этого клиента пока нет зарегистрированных питомцев.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Добавить питомца</h3>
+    <form method="POST" action="{{ url_for('add_pet', client_id=client.id) }}">
+        <input type="text" name="name" placeholder="Кличка" required>
+        <select name="species">
+            <option value="Cat">Кошка</option>
+            <option value="Dog">Собака</option>
+            <option value="Other">Другое</option>
+        </select>
+        <button type="submit" class="btn" style="padding: 5px 10px;">Add</button>
+    </form>
+{% endblock %}

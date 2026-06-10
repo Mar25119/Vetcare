@@ -1,0 +1,41 @@
+# ==================================
+# VetCare PRODUCTION Docker Compose
+# ==================================
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: vetcare-prod
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - FLASK_DEBUG=0
+      - DATABASE_URL=sqlite:////app/instance/vetcare.db
+      - SECRET_KEY=${SECRET_KEY:-change-me-in-production-min-32-chars}
+      - GUNICORN_WORKERS=1
+      - GUNICORN_TIMEOUT=120
+    volumes:
+      - vetcare_data:/app/instance
+      - vetcare_logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - vetcare-network
+
+volumes:
+  vetcare_data:
+    driver: local
+  vetcare_logs:
+    driver: local
+
+networks:
+  vetcare-network:
+    driver: bridge
