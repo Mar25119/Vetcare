@@ -425,6 +425,6 @@ scripts\logs-security.bat     # Анализ логов на ошибки
 ## 🔗 Ссылки
 
 - **GitHub репозиторий:** https://github.com/Mar25119/Vetcare
-- **Demo:** http://127.0.0.1:5000 (локальный запуск)
+- **Demo:** http://127.0.0.1:5000 (локальный запуск) и https://mar213.pythonanywhere.com/ 
 - **Issues:** https://github.com/Mar25119/Vetcare/issues
 - **Pull Requests:** https://github.com/Mar25119/Vetcare/pulls
