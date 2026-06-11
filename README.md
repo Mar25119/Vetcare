@@ -6,7 +6,6 @@
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![Flask](https://img.shields.io/badge/Flask-3.0.3-lightgrey?logo=flask)
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)
-![CI/CD](https://github.com/Mar25119/Vetcare/workflows/CI/badge.svg)
 ![Tests](https://img.shields.io/badge/Tests-17%20passed-success)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
@@ -318,9 +317,6 @@ scripts\logs-security.bat     # Анализ логов на ошибки
 - ✅ Форматтер Black
 - ✅ Тесты pytest
 - ✅ Компиляция всех Python-файлов
-
-### Статус CI
-![CI](https://github.com/Mar25119/Vetcare/workflows/CI/badge.svg)
 
 ---
 
